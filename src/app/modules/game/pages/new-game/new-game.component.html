@@ -1,13 +1,19 @@
 <h1>New Game</h1>
 
-<form>
-  <select multiple title="Players list" name="players" id="3">
-    <option value="1">Player 1</option>
-    <option value="2">Player 2</option>
-    <option value="3">Player 3</option>
+<form (ngSubmit)="!form.valid ? submit() : false" [formGroup]="form">
+  <select
+    formControlName="players"
+    multiple
+    title="Players list"
+    name="players"
+    id="3"
+  >
+    <option *ngFor="let p of players" [value]="p.id">{{ p.name }}</option>
   </select>
   <br />
-  <div>U must select at least 2 players</div>
+
+  <div *ngIf="form.invalid">{{ form.errors }}</div>
+
   <br />
   <button type="submit">New game</button>
 </form>
